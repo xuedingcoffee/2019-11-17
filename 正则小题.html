@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+           把下面str的name，age，say换成obj中的value值
+        
+        */
+        let obj = {
+            name: '小明',
+            age: 18,
+            say: '好好学习，天天向上'
+        }
+        //原始方法：
+        // let str='名字：'+obj.name+',年龄：'+obj.age+',想说：'+obj.say+''
+        //  console.log(str)
+
+        //正则方法
+        let str = '名字：${name},年龄：${age},想说：${say}'
+
+        let s = str.replace(/\${(\w+)}/g, (...arg) => {
+            console.log(arg);
+            //["${name}", "name", 3, "名字：${name},年龄：${age},想说：${say}"]
+            //["${age}", "age", 14, "名字：${name},年龄：${age},想说：${say}"]
+            //["${say}", "say", 24, "名字：${name},年龄：${age},想说：${say}"]
+            let [, kry] = arg
+            return obj[kry]
+            //console.log(obj[kry])
+
+        })
+        console.log(s)
+
+        /*
+               计算下面字符串中哪个字符出现的次数最多,它是谁，出现了多少次
+          
+               //通过对象的默认key值为数字就自动排列的特性就进行排列
+           */
+
+        //方法1
+        // let str2 = 'hdd82nxa89a3axdma2naejaaxaa8n2xdanja2cah2hnadhioamwajexnad8mdahiodn';
+
+        // let ss = str2.split('').sort().join('').match(/([\da-z])\1+/g)
+        // console.log(ss)
+        // //["22222", "8888", "aaaaaaaaaaaaaaaaa", "dddddddd", "ee", "hhhhh", "ii", "jjj", "mmm", "nnnnnnn", "oo", "xxxxx"]
+
+        // let ary = []
+        // for (var i = 0; i < ss.length; i++) {
+        //     ary = ss.sort((a, b) => {
+        //         return b.length - a.length
+
+        //     })
+        // }
+        // console.log(ary[0].length)
+        // console.log(ary[0][0])
+        //方法2
+        let ary2 = []
+        let obj1={}
+        let str3 = 'hdd82nxa89a3axdma2naejaaxaa8n2xdanja2cah2hnadhioamwajexnad8mdahiodn';
+        //obj.key是出现的次数，obj.value是属性值即str中不同的字符，次数是自动排序的
+      
+            for (var i = 0; i < str3.length; i++) {
+                if (!ary2.includes(str3[i])) {
+                let re = new RegExp(str3[i], 'g');
+                let len = str3.match(re).length;
+                obj1[len] = str3[i]
+                ary2.push(str3[i])
+            }
+            else
+            { continue }
+
+            }
+
+       let key=Object.keys(obj1)  //key值会自动排序
+       let val=Object.values(obj1)
+ 
+       console.log(key[key.length-1],val[val.length-1])
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
